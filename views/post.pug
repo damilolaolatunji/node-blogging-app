@@ -1,0 +1,18 @@
+extends default
+
+block content
+  section.hero.is-primary 
+    .hero-body 
+      .container
+        .row.justify-content-md-center
+          .col-12.col-md-11.col-lg-9.col-xl-7.col-xxl-6.text-center.p-4
+            h1.title.is-1.has-text-centered= post.title
+
+  section.section
+    .container
+      .content= post.content 
+
+      .mt-4
+        a.btn.btn-primary.me-2(href=`/`) Back to Posts
+        a.btn.btn-warning.me-2(href=`/post/${post.id}/edit`) Edit
+        a.btn.btn-danger(href=`/post/${post.id}/delete`) Delete

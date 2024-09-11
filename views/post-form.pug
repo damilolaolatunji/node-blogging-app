@@ -1,0 +1,29 @@
+extends default
+
+block content
+  - const endpoint = post ? `/post/${post.id}/edit` : "/post/new"
+  - const title = post ? post.title : ""
+  - const content = post ? post.content : ""
+  section.hero.is-primary 
+    .hero-body 
+      .container
+        .row.justify-content-md-center
+          .col-12.col-md-11.col-lg-9.col-xl-7.col-xxl-6.text-center.p-4
+            if !post
+              h1.title.is-1.has-text-centered Create New Blog Post
+            else
+              h1.title.is-1.has-text-centered Edit Post
+
+  section.section
+    .container
+      form(action=`${endpoint}`, method="POST")
+        .mb-3
+          label.form-label(for="title") Title
+          input.form-control(type="text", value=`${title}`, id="title", name="title", placeholder="Enter your blog post title", required)
+
+        .mb-3
+          label.form-label(for="content") Content
+          textarea.form-control(id="content", name="content", placeholder="Write your blog post content here", rows="10", required)= content
+
+        .d-flex.justify-content-start
+          button.btn.btn-primary(type="submit") Save Post
