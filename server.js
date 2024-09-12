@@ -1,6 +1,7 @@
 import app from './app.js';
 import env from './config/env.js';
 import logger from './config/logger.js';
+import sequelize from './db/sequelize.js';
 
 function exit() {
   if (app.server) {
@@ -19,6 +20,10 @@ function handleError(error) {
 }
 
 try {
+  await sequelize.authenticate();
+
+  logger.info('Connected to the database');
+
   const address = await app.listen({ port: env.port });
 
   process.on('SIGTERM', () => {
